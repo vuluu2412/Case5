@@ -13,6 +13,7 @@ function LoginPage() {
                 <h1 style={{textAlign: "center"}}>Page Login</h1>
                 <Formik initialValues={{username: '', password: ''}} onSubmit={(values) => {
                     dispatch(login(values));
+                    console.log(values)
                 }}>
                     <Form>
                         <div className="group">
