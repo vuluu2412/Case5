@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getBlogs} from "../services/blogsService";
 import {login} from "../services/userService";
@@ -7,13 +7,20 @@ import {Field, Form, Formik} from "formik";
 
 function LoginPage() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const user = useSelector(state => {
+        return state.user;
+    })
     return (
         <div className={'row'}>
             <div className="offset-3 col-6">
                 <h1 style={{textAlign: "center"}}>Page Login</h1>
                 <Formik initialValues={{username: '', password: ''}} onSubmit={(values) => {
-                    dispatch(login(values));
-                    console.log(values)
+                     dispatch(login(values));
+                    if  (user.currentUser.id !== undefined) {
+                      navigate('/home')
+                     }
+                     else navigate('')
                 }}>
                     <Form>
                         <div className="group">

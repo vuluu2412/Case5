@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {getBlogs} from "../services/blogsService";
 
 function Navbar() {
+    const dispatch = useDispatch();
+    const userName = useSelector(state =>{
+        return state.blogs.blogs;
+    })
     return (
         <div className="row">
             <div className='col-12'>
@@ -25,7 +31,9 @@ function Navbar() {
                             <div className="nav-item dropdown mr-5">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                    aria-expanded="false">
-                                    Username
+                                    {userName.map((item)=>(
+                                        item.user.username
+                                    ))}
                                 </a>
                                 <div className="dropdown-menu">
                                     <a className="dropdown-item" href="#"> Edit Profile</a>
