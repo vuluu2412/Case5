@@ -8,13 +8,13 @@ import {addBlogs} from "../../services/blogsService";
 function AddBlog() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const users = useSelector(state => {
-        console.log(state.user.currentUser,'aaaaa')
-        return state.user.currentUser;
+    const users = useSelector(state =>{
+        // console.log(state.user.currentUser.userCurrent);
+        return state.user.currentUser.userCurrent;
     })
-    console.log(users,'abccc')
     const handleAdd = (values)=>{
-        let data = {...values,user:{id:users.id}}
+        let data = {...values,user:{_id:users._id}}
+        console.log(data)
         dispatch(addBlogs(data))
         navigate('/home')
     }

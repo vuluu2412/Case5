@@ -5,8 +5,8 @@ import {getBlogs} from "../services/blogsService";
 
 function Navbar() {
     const dispatch = useDispatch();
-    const userName = useSelector(state =>{
-        return state.blogs.blogs;
+    const userName = useSelector(state => {
+        return state.user?.currentUser?.userCurrent;
     })
     return (
         <div className="row">
@@ -31,14 +31,14 @@ function Navbar() {
                             <div className="nav-item dropdown mr-5">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                    aria-expanded="false">
-                                    {userName.map((item)=>(
-                                        item.user.username
-                                    ))}
+                                    {userName?.username}
                                 </a>
                                 <div className="dropdown-menu">
                                     <a className="dropdown-item" href="#"> Edit Profile</a>
                                     <div className="dropdown-divider"></div>
-                                    <Link className="dropdown-item" to={'/'}>Logout</Link>
+                                    <Link onClick={() => {
+                                        localStorage.clear()
+                                    }} className="dropdown-item" to={'/'}>Logout</Link>
                                 </div>
                             </div>
                         </div>

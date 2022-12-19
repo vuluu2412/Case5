@@ -26,7 +26,6 @@ function LoginPage() {
                         <div className="group">
                             <label htmlFor="exampleInputEmail1">Email address/ Username</label>
                             <Field type={'text'} name={'username'} className={'form-control'}/>
-
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleInputPassword1">Password</label>
