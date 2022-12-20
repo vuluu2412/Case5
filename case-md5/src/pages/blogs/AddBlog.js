@@ -9,35 +9,32 @@ function AddBlog() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const users = useSelector(state =>{
-        // console.log(state.user.currentUser.userCurrent);
-        return state.user.currentUser.userCurrent;
+        return state.user.currentUser;
     })
     const handleAdd = (values)=>{
-        let data = {...values,user:{_id:users._id}}
-        console.log(data)
+        let data = {...values,idU:users.id,time:(new Date().getFullYear() + '/'+ (new Date().getMonth() + 1) + '/' + new Date().getDate())}
         dispatch(addBlogs(data))
         navigate('/home')
     }
     return (
         <div className={'row'}>
-            <div className="offset-3 col-6">
-                <h1 style={{textAlign: "center"}}>Add Laptops</h1>
-                <Formik initialValues={{name: '', price: '', quantity:''}} onSubmit={(values) => {
+            <div className="offset-6 col-12">
+                <h1 style={{textAlign: "center"}}>Add Blogs</h1>
+                <Formik initialValues={{title: '', content: '', time:''}} onSubmit={(values) => {
                    handleAdd(values)
                 }}>
                     <Form>
                         <div className="group">
-                            <label htmlFor="exampleInputEmail1">Name Laptop</label>
-                            <Field type={'text'} name={'name'} className={'form-control'}/>
-
+                            <label htmlFor="exampleInputEmail1">Title</label>
+                            <Field type={'text'} name={'title'} className={'form-control'}/>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Price</label>
-                            <Field type={'number'} name={'price'} className={'form-control'}/>
+                            <label htmlFor="exampleInputPassword1">Contents</label>
+                            <Field type={'number'} name={'content'} className={'form-control'}/>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Quantity</label>
-                            <Field type={'number'} name={'quantity'} className={'form-control'}/>
+                            <label htmlFor="exampleInputPassword1">Status</label>
+                            <Field type={'number'} name={'status'} className={'form-control'}/>
                         </div>
                         <button type="submit">Submit</button>
                     </Form>

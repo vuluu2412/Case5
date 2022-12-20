@@ -1,17 +1,23 @@
 import {createSlice, current} from "@reduxjs/toolkit";
-import {login} from "../../services/userService";
+import {login, register} from "../../services/userService";
+
 
 const initialState = {
     currentUser: JSON.parse(localStorage.getItem('user'))
 }
 const userSlice = createSlice({
-    name:'user',
+    name: 'user',
     initialState,
-    extraReducers:builder => {
-        builder.addCase(login.fulfilled,(state,action)=>{
+    extraReducers: builder => {
+        builder.addCase(login.fulfilled, (state, action) => {
             state.currentUser = action.payload.data
-            console.log(action,'userslice')
-            localStorage.setItem('user',JSON.stringify(action.payload.data))
+            console.log(action, 'login')
+            localStorage.setItem('user', JSON.stringify(action.payload.data))
+        });
+        builder.addCase(register.fulfilled, (state, action) => {
+            // console.log(action.payload, 're')
+            state.currentUser = action.payload
+            // console.log(action, 'register')
         })
     }
 })

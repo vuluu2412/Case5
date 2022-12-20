@@ -6,7 +6,7 @@ import {getBlogs} from "../services/blogsService";
 function Navbar() {
     const dispatch = useDispatch();
     const userName = useSelector(state => {
-        return state.user?.currentUser?.userCurrent;
+        return state.user.currentUser.userName;
     })
     return (
         <div className="row">
@@ -31,10 +31,10 @@ function Navbar() {
                             <div className="nav-item dropdown mr-5">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                    aria-expanded="false">
-                                    {userName?.username}
+                                    {userName}
                                 </a>
                                 <div className="dropdown-menu">
-                                    <a className="dropdown-item" href="#"> Edit Profile</a>
+                                    <Link className="dropdown-item" to={'/home/my-blogs'}> My Blogs</Link>
                                     <div className="dropdown-divider"></div>
                                     <Link onClick={() => {
                                         localStorage.clear()

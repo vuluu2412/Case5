@@ -1,18 +1,23 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {addBlogs, getBlogs} from "../../services/blogsService";
+import {addBlogs, deleteBlogs, getBlogs} from "../../services/blogsService";
+
 const initialState = {
-    blogs:[]
+    blogs: []
 }
-const blogsSlice= createSlice({
-    name:'blogs',
+const blogsSlice = createSlice({
+    name: 'blogs',
     initialState,
-    reducers:{},
-    extraReducers: builder =>{
-        builder.addCase(getBlogs.fulfilled,(state,action)=>{
+    reducers: {},
+    extraReducers: builder => {
+        builder.addCase(getBlogs.fulfilled, (state, action) => {
             state.blogs = action.payload.data
         });
-        builder.addCase(addBlogs.fulfilled,(state,action)=>{
+        builder.addCase(addBlogs.fulfilled, (state, action) => {
+            console.log(action.payload, 'blogslice')
             state.blogs.push(action.payload)
+        });
+        builder.addCase(deleteBlogs.fulfilled, (state, action) => {
+            state.blogs = state.blogs.filter(item => item.id != action.payload)
         });
     }
 })
