@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {deleteBlogs, getBlogs} from "../../services/blogsService";
 import {login} from "../../services/userService";
+
 
 
 function ListBlog() {
@@ -10,40 +11,63 @@ function ListBlog() {
         console.log(state.blogs.blogs)
         return state.blogs.blogs;
     })
-    const userName = useSelector(state => {
-        console.log(state.user)
-        return state.user.currentUser;
-    })
     useEffect(() => {
         dispatch(getBlogs());
     }, [])
     return (
-        <div className={'row'}>
-            <div className="col-12" style={{textAlign: "center"}}>
-                <h1>List Blog</h1>
-                <table className="table table-striped">
-                    <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Content</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">IdUser</th>
-                    </tr>
+        <>
 
-                    {blogs.map((item, index) => {
-                        return (
-                            <tr>
-                                <th scope="row">{index + 1}</th>
-                                <td>{item.title}</td>
-                                <td>{item.content}</td>
-                                <td>{item.time}</td>
-                                <td>{item.idU}</td>
-                            </tr>
-                        )
-                    })
-                    }</table>
+            <div id="slides" className="carousel slide" data-ride="carousel">
+                <ul className="carousel-indicators ">
+                    <li data-target="#slides" data-slide-to="0" className="active"></li>
+                    <li data-target="#slides" data-slide-to="1"></li>
+                    <li data-target="#slides" data-slide-to="2"></li>
+                </ul>
+                <div className="carousel-inner">
+                    <div className="carousel-item active">
+                        <div className="">
+                            <img style={{width: '100%', height: '100%', objectFit: 'cover'}}
+                                 src="https://i.vietnamdoc.net/data/image/2016/03/18/lich-su-ra-doi-ngay-26-3.jpg"></img>
+                        </div>
+                    </div>
+                    <div className="carousel-item">
+                        <img
+                            src="https://thanhnien.ntu.edu.vn/uploads/28/images/news/4951/img/tieu-chun-xep-loai-doan-vien.jpg"></img>
+                    </div>
+                    <div className="carousel-item">
+                        <img
+                            src="https://file1.dangcongsan.vn/data/0/images/2022/10/18/minhchau/img-9233.jpg"></img>
+                    </div>
+                    <div className="carousel-caption">
+                        <h1 className="display-2">Example</h1>
+                        <h3>Autolayout with Boostrap</h3>
+                        <button type="button" className="btn btn-outline-light btn-lg">
+                            VIEW TUTORIALS
+                        </button>
+                        <button type="button" className="btn btn-primary btn-lg">Get Started</button>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div className="container-fluid padding">
+                <div className="row text-center padding">
+                    {blogs.map((item, index) => {
+                        if (item.status === 1){
+                            return (
+                                <div className="col-xs-12 col-sm-6 col-md-4 imgCover">
+                                    <img src={item.url} style={{width:300, height:300 ,objectFit:"cover"}}></img>
+                                    <h3>{item.title}</h3>
+                                    <p>{item.content}</p>
+                                    <p>{item.time}</p>
+                                    <p>{item.idU}</p>
+                                </div>
+                            )
+                        } else return <></>
+                    })
+                    }
+
+                </div>
+            </div>
+        </>
     );
 }
 

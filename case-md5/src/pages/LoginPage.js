@@ -6,16 +6,21 @@ import {login} from "../services/userService";
 import {Field, Form, Formik} from "formik";
 
 function LoginPage() {
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(state => {
-        return state.user.currentUser;
+        return state.user.currentUser
     })
+    // const check = user.message;
     const handleLogin = async (values) => {
         await dispatch(login(values))
-        if (values.name === user.userName) {
+        if (values.name == user.userName) {
             navigate('/home')
-        } else navigate('')
+        } else {
+            navigate('')
+        }
+
     }
 
     return (

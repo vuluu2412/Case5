@@ -9,7 +9,7 @@ import AddBlog from "./pages/blogs/AddBlog";
 import LoginPage from "./pages/LoginPage";
 import {useSelector} from "react-redux";
 import MyBlogs from "./pages/blogs/my-blogs";
-
+import './components/demoBootstrap.css'
 function App() {
     const user = useSelector(state => {
         return state.user.currentUser;

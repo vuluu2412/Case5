@@ -28,8 +28,8 @@ function Navbar() {
                             </li>
                         </ul>
                         <div>
-                            <div className="nav-item dropdown mr-5">
-                                <a className="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                            <div className="nav-item dropdown  mr-5">
+                                <a className="nav-link dropdown-toggle userColor" href="#" role="button" data-toggle="dropdown"
                                    aria-expanded="false">
                                     {userName}
                                 </a>
