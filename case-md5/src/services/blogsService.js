@@ -23,3 +23,11 @@ export const deleteBlogs = createAsyncThunk(
         return data
     }
 )
+export const findBlogs = createAsyncThunk(
+    'blogs/findBlogs',
+    async (data) => {
+        const res = await axios.get('http://localhost:8080/posts/find-by-name?title=' +data.title)
+        console.log('data', data)
+        return res
+    }
+)

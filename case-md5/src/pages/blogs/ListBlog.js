@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {deleteBlogs, getBlogs} from "../../services/blogsService";
 import {login} from "../../services/userService";
+import {getLikes} from "../../services/likeService";
 
 
 
@@ -11,8 +12,17 @@ function ListBlog() {
         console.log(state.blogs.blogs)
         return state.blogs.blogs;
     })
+    const likes = useSelector(state => {
+        console.log('state.blogs.likes',state.likes.likes)
+        return state.likes.likes;
+    })
+    const [like,setLike]= useState()
+
     useEffect(() => {
         dispatch(getBlogs());
+    }, [])
+    useEffect(() => {
+        dispatch(getLikes());
     }, [])
     return (
         <>
@@ -48,23 +58,29 @@ function ListBlog() {
                     </div>
                 </div>
             </div>
+            <br/>
             <div className="container-fluid padding">
                 <div className="row text-center padding">
                     {blogs.map((item, index) => {
                         if (item.status === 1){
                             return (
-                                <div className="col-xs-12 col-sm-6 col-md-4 imgCover">
+                                <div className="col-xs-12 col-sm-6 col-md-4 imgCover mb-3">
                                     <img src={item.url} style={{width:300, height:300 ,objectFit:"cover"}}></img>
                                     <h3>{item.title}</h3>
                                     <p>{item.content}</p>
                                     <p>{item.time}</p>
                                     <p>{item.idU}</p>
+                                    <button onClick={(values)=>{
+                                        // values = {idU: itemB.idU, idP: itemB.id}
+                                        // soLike = soLike + 1;
+                                        // dispatch(likeBlog(values))
+                                        // setLike(soLike)
+                                    }}>Like</button>
                                 </div>
                             )
                         } else return <></>
                     })
                     }
-
                 </div>
             </div>
         </>

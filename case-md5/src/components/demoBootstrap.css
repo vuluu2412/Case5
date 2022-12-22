@@ -8,7 +8,10 @@ html,body{
     color:crimson;
 }
 .navbar{
-    background-color: rgba(12,32,423,0.7) !important;
+    background-color:white;
+    z-index: 15;
+    min-width: 100vw;
+    position: fixed;
 }
 a:hover{
     color: white !important;

@@ -25,10 +25,8 @@ function AddBlog() {
         dispatch(addBlogs(data))
         navigate('/home')
     }
-
     const [imageUrls, setImageUrls] = useState([]);
     const [img, setImg] = useState("");
-
     const imagesListRef = ref(storage, "images/");
     const uploadFile = (imageUpload) => {
         if (imageUpload == null) return;
@@ -39,7 +37,6 @@ function AddBlog() {
                 setSubmitting(false)
             });
         })
-
     };
     useEffect(() => {
         listAll(imagesListRef).then((response) => {

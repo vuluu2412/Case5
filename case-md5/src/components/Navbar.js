@@ -1,13 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {getBlogs} from "../services/blogsService";
+import {findBlogs, getBlogs} from "../services/blogsService";
 
 function Navbar() {
     const dispatch = useDispatch();
     const userName = useSelector(state => {
         return state.user.currentUser.userName;
     })
+    const [find,setFind] = useState()
     return (
         <div className="row">
             <div className='col-12'>
@@ -26,7 +27,22 @@ function Navbar() {
                                 <Link className="nav-link" to={'add-blog'}>Add new blog <span
                                     className="sr-only">(current)</span></Link>
                             </li>
+
                         </ul>
+                        <input className=" mr-sm-2" type="search" placeholder="Search"
+                               aria-label="Search"
+                               onChange={(e)=>{
+                                   setFind(e.target.value)
+
+                               }}
+                        />
+                        <button onClick={ (value)=>{
+                            value= {title: find}
+                            dispatch(findBlogs(value))
+                            console.log(value)
+                        }
+                        } className="btn btn-outline-success my-2 my-sm-0" type="submit">Search
+                        </button>
                         <div>
                             <div className="nav-item dropdown  mr-5">
                                 <a className="nav-link dropdown-toggle userColor" href="#" role="button" data-toggle="dropdown"
