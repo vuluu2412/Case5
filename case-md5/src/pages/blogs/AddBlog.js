@@ -19,7 +19,7 @@ function AddBlog() {
         let data = {
             ...values,
             idU: users.id,
-            time: (new Date().getFullYear() + '/' + (new Date().getMonth() + 1) + '/' + new Date().getDate()),
+            time: new Date().getTimezoneOffset(),
             url: img
         }
         dispatch(addBlogs(data))

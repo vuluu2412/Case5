@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {deleteBlogs, getBlogs} from "../../services/blogsService";
 import {login} from "../../services/userService";
-import {getLikes} from "../../services/likeService";
+import {getLikes, likeBlog} from "../../services/likeService";
 
 
 
@@ -16,7 +16,7 @@ function ListBlog() {
         console.log('state.blogs.likes',state.likes.likes)
         return state.likes.likes;
     })
-    const [like,setLike]= useState()
+
 
     useEffect(() => {
         dispatch(getBlogs());
@@ -61,20 +61,30 @@ function ListBlog() {
             <br/>
             <div className="container-fluid padding">
                 <div className="row text-center padding">
-                    {blogs.map((item, index) => {
-                        if (item.status === 1){
+                    {blogs.map((itemB, index) => {
+                        let demLike = 0;
+                        {likes.map(itemL=>{
+                            if(itemB.id==itemL.idP) {
+                                demLike ++
+                                console.log('itemL.idP', itemL.idP)
+
+                            }
+                        })}
+                        if (itemB.status === 1){
+
                             return (
                                 <div className="col-xs-12 col-sm-6 col-md-4 imgCover mb-3">
-                                    <img src={item.url} style={{width:300, height:300 ,objectFit:"cover"}}></img>
-                                    <h3>{item.title}</h3>
-                                    <p>{item.content}</p>
-                                    <p>{item.time}</p>
-                                    <p>{item.idU}</p>
+                                    <img src={itemB.url} style={{width:300, height:300 ,objectFit:"cover"}}></img>
+                                    <h3>Title: {itemB.title}</h3>
+                                    <p>Content: {itemB.content}</p>
+                                    <p>Time: {itemB.time}</p>
+                                    <p>IdU: {itemB.idU}</p>
+                                    <p>Like: {demLike}</p>
                                     <button onClick={(values)=>{
-                                        // values = {idU: itemB.idU, idP: itemB.id}
-                                        // soLike = soLike + 1;
-                                        // dispatch(likeBlog(values))
-                                        // setLike(soLike)
+                                        values = {idU: itemB.idU, idP: itemB.id}
+                                        demLike = demLike + 1;
+                                        dispatch(likeBlog(values))
+
                                     }}>Like</button>
                                 </div>
                             )
