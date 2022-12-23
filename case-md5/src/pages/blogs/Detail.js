@@ -3,9 +3,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {deleteBlogs, getBlogs} from "../../services/blogsService";
 import {login} from "../../services/userService";
 import {getLikes, likeBlog} from "../../services/likeService";
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
-function ListBlog() {
+
+
+function DetailBlog() {
     const dispatch = useDispatch();
     const blogs = useSelector(state => {
         console.log(state.blogs.blogs)
@@ -15,9 +17,8 @@ function ListBlog() {
         console.log('state.blogs.likes',state.likes.likes)
         return state.likes.likes;
     })
-
-
-
+    const {id} = useParams();
+    console.log(id,'iddddd')
     useEffect(() => {
         dispatch(getBlogs());
     }, [])
@@ -70,23 +71,22 @@ function ListBlog() {
 
                             }
                         })}
-                        console.log(itemB,'itemBBBBB')
-                        if (itemB.status === 1){
+                        if (itemB.status === 1 && itemB.id == id){
 
                             return (
                                 <div className="col-xs-12 col-sm-6 col-md-4 imgCover mb-3">
                                     <img src={itemB.url} style={{width:300, height:300 ,objectFit:"cover"}}></img>
-                                    <Link to={`detail/${itemB.id}`}><h3>Title: {itemB.title}</h3></Link>
+                                    <h3>Title: {itemB.title}</h3>
+                                    <p>Content: {itemB.content}</p>
                                     <p>Time: {itemB.time}</p>
+                                    <p>IdU: {itemB.idU}</p>
                                     <p>Like: {demLike}</p>
                                     <button onClick={(values)=>{
                                         values = {idU: itemB.idU, idP: itemB.id}
                                         demLike = demLike + 1;
-
                                         dispatch(likeBlog(values))
 
                                     }}>Like</button>
-
                                 </div>
                             )
                         } else return <></>
@@ -98,4 +98,4 @@ function ListBlog() {
     );
 }
 
-export default ListBlog;
+export default DetailBlog;

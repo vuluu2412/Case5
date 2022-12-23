@@ -19,7 +19,7 @@ function AddBlog() {
         let data = {
             ...values,
             idU: users.id,
-            time: new Date().getTimezoneOffset(),
+            time: new Date().toLocaleTimeString(),
             url: img
         }
         dispatch(addBlogs(data))
@@ -66,7 +66,7 @@ function AddBlog() {
                     </div>
                     <div className="form-group">
                         <label htmlFor="exampleInputPassword1">Contents</label>
-                        <Field type={'number'} name={'content'} className={'form-control'}/>
+                        <Field type={'text'} name={'content'} className={'form-control'}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="exampleInputPassword1">Image</label>

@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import {useSelector} from "react-redux";
 import MyBlogs from "./pages/blogs/my-blogs";
 import './components/demoBootstrap.css'
+import Detail from "./pages/blogs/Detail";
 function App() {
     const user = useSelector(state => {
         return state.user.currentUser;
@@ -26,6 +27,7 @@ function App() {
                                 <Route path={''} element={<ListBlog/>}></Route>
                                 <Route path={'add-blog'} element={<AddBlog/>}></Route>
                                 <Route path={'my-blogs'} element={<MyBlogs></MyBlogs>}></Route>
+                                <Route path='detail/:id' element={<Detail></Detail>}></Route>
                             </Route>
                             :
                             <Route path="*" element={<LoginPage/>}/>

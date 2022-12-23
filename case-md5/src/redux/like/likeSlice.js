@@ -17,6 +17,10 @@ const likesSlice = createSlice({
             state.likes = action.payload.data
             console.log('state.likes', state.likes)
         });
+        // builder.addCase(deleteLikes.fulfilled, (state, action) => {
+        //     state.likes = action.payload.data
+        //     console.log('state.likes', state.likes)
+        // });
     }
 })
 export default likesSlice.reducer

@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {deleteBlogs, getBlogs} from "../../services/blogsService";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -14,6 +16,19 @@ function MyBlogs() {
         console.log(state.user)
         return state.user.currentUser;
     })
+    const showToastMessage = () => {
+        toast('👍 Delete success!!!', {
+            position: "top-right",
+            autoClose: 500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    };
+
     useEffect(() => {
         dispatch(getBlogs());
     }, [])
@@ -41,9 +56,11 @@ function MyBlogs() {
                                 <td>{item.idU}</td>
                                 <button>Edit</button>
                                 <button onClick={() => {
+                                    showToastMessage()
                                     dispatch(deleteBlogs(item.id))
                                 }}>Delete
                                 </button>
+                                <ToastContainer />
                             </tr>
                         )}
                     })
